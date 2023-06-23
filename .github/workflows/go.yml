@@ -6,14 +6,21 @@ name: Go
 run-name: Deploy to ${{ inputs.deploy_target }} by @${{ github.actor }}
 
 on:
+  pull_request:
+    branches:
+      - '**'
   push:
     branches:
-      - feijao
+      - master
 
 jobs:
 
   teste:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        go_version: ['1.18', '1.17', '>=1.18']
+        os: ['ubuntu-latest', 'ubuntu-18.04']
     steps:
     - uses: actions/checkout@v3
 
@@ -34,6 +41,9 @@ jobs:
   build:
     needs: teste
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: ['ubuntu-latest', 'ubuntu-18.04']
     steps:
     - uses: actions/checkout@v3
     - name: Build
