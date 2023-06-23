@@ -16,7 +16,7 @@ on:
 jobs:
 
   teste:
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
     env:
       HOST: localhost
       PORT: 5432
@@ -26,7 +26,6 @@ jobs:
     strategy:
       matrix:
         go_version: ['1.18', '1.17', '>=1.18']
-        os: ['ubuntu-latest']
     steps:
     - uses: actions/checkout@v3
 
@@ -47,9 +46,6 @@ jobs:
   build:
     needs: teste
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        os: ['ubuntu-latest']
     steps:
     - uses: actions/checkout@v3
     - name: Build
