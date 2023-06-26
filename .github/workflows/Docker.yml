@@ -26,4 +26,4 @@ jobs:
         context: .
         file: ./Dockerfile
         push: true
-        tags: # aqui eu posso inserir o nome da imagem do docker.
+       # tags: # aqui eu posso inserir o nome da imagem do docker.
